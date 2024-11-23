@@ -9,9 +9,9 @@ A highly scalable and modular platform designed for compiling and executing code
 2. [Tech Stack](#tech-stack)
 3. [Features](#features)
 4. [Microservices](#microservices)
-5. [Getting Started](#getting-started)
-6. [Project Repositories](#project-repositories)
-7. [System Architecture](#system-architecture)
+5. [System Architecture](#system-architecture)
+6. [Getting Started](#getting-started)
+7. [Project Repositories](#project-repositories)
 
 ---
 
