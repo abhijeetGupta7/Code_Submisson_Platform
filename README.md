@@ -77,8 +77,39 @@ Key Highlights:
 
 ---
 
+
+
 ## **System Architecture**
-![System Architecture Diagram](https://via.placeholder.com/800x400.png?text=Add+Your+System+Architecture+Diagram+Here)
+
+![Architecture for Coding Platform Backend](https://github.com/abhijeetGupta7/Code_Submisson_Platform_BACKEND/blob/main/Architecture%20for%20Coding%20Platform%20Backend.jpg)
+
+The following steps explain the flow of requests and responses in the platform:
+
+1. **Client Interaction**:
+   - The client sends a code submission request to the **Submission Service**.
+
+2. **Problem Details Fetching**:
+   - The **Submission Service** makes a synchronous request to the **Problem Admin Service** to fetch problem details.
+   - The **Problem Admin Service** queries the MongoDB database to retrieve the requested problem details and sends them back to the **Submission Service**.
+
+3. **Submission Entry**:
+   - The **Submission Service** creates a submission entry in the database and adds the submission payload (with the updated code stub) to the **Redis queue**.
+
+4. **Acknowledgement to Client**:
+   - The **Submission Service** sends an immediate response to the client, confirming that the submission has been received.
+
+5. **Code Evaluation**:
+   - The **Evaluator Service** picks the submission payload from the Redis queue and evaluates the code.
+   - It performs test case matching and determines the status of the submission (e.g., pass, fail, or error).
+
+6. **Evaluation Queue**:
+   - The **Evaluator Service** adds the evaluation result to another Redis queue.
+
+7. **Submission Update**:
+   - The **Submission Service** retrieves the evaluation result from the evaluation queue, updates the submission details in the database, and notifies the **WebSocket Service**.
+
+8. **Real-time Client Feedback**:
+   - The **WebSocket Service** sends a real-time update about the submission status (e.g., passed or failed) to the client.
 
 ---
 
